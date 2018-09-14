@@ -1,0 +1,29 @@
+
+case:
+  - name: test1
+    request:
+      method: GET
+      path: /ruok
+    expect:
+      status: 200
+      header:
+      body: imok
+  - name: test2
+    request:
+      method: POST
+      path: /ruok
+    expect:
+      status: 405
+      header:
+      body:
+  - name: test3
+    request:
+      method: GET
+      path: /json
+    expect:
+      status: 200
+      header:
+      json:
+        test: 1
+        test2: "2"
+        test3: [1,2,3]
