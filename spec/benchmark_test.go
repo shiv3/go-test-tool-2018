@@ -1,21 +1,22 @@
 package spec
 
 import (
-	"net/http"
 	"testing"
 )
 
-func BenchmarkRuok(b *testing.B) {
-	var t testing.T
-	e := getExpectServer(&t)
+func bench(b *testing.B,path string){
+	e := getExpectServer(&testing.T{})
+	b.ResetTimer()
 	for n := 0; n < b.N; n++ {
-		e.GET("/ruok").
-			Expect().
-			Status(http.StatusOK).
-			Body().Equal("imok")
-
-		e.POST("/ruok").
-			Expect().
-			Status(http.StatusMethodNotAllowed)
+		e.GET(path).
+			Expect()
 	}
+}
+
+func BenchmarkRuok(b *testing.B) {
+	bench(b,"/ruok")
+}
+
+func BenchmarkSlow(b *testing.B) {
+	bench(b,"/slow")
 }

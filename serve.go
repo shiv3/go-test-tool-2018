@@ -5,8 +5,7 @@ import (
 	"net/http"
 )
 
-func main()  {
-
+func main() {
 	h := handle.Handler()
-	http.ListenAndServe(":8080",h)
+	http.ListenAndServe(":8080", h)
 }
