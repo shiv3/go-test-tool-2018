@@ -19,7 +19,8 @@ func handlerRuok(w http.ResponseWriter, r *http.Request) {
 func GetOnlyJSON(h func(http.ResponseWriter, *http.Request)) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != "GET" {
-			w.WriteHeader(http.StatusMethodNotAllowed);return
+			w.WriteHeader(http.StatusMethodNotAllowed)
+			return
 		}
 		w.Header().Set("Content-Type", "application/json")
 		h(w, r)
@@ -27,9 +28,10 @@ func GetOnlyJSON(h func(http.ResponseWriter, *http.Request)) func(http.ResponseW
 }
 
 func handlerJSON(w http.ResponseWriter, r *http.Request) {
-	k,ok := r.URL.Query()["v"]
-	if !ok || len(k)<1{
-		w.WriteHeader(http.StatusBadRequest);return
+	k, ok := r.URL.Query()["v"]
+	if !ok || len(k) < 1 {
+		w.WriteHeader(http.StatusBadRequest)
+		return
 	}
 	j, _ := json.Marshal(map[string]interface{}{
 		"test":  1,
